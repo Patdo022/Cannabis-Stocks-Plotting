@@ -1,0 +1,100 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('WeedStocksInformation.csv')
+df1 = pd.read_csv('WeedStocksValuationMeasures.csv')
+df2 = pd.read_csv('WeedStocksPrices.csv')
+"""df1 = df1[df1['periodType'] != 'TTM']"""
+df2 = df2[df2['date'] > '2021-09-01']
+df2 = df2[df2['date'] < '2022-11-01']
+df2['month'] = pd.DatetimeIndex(df2['date']).month
+df2['quarter'] = pd.DatetimeIndex(df2['date']).quarter
+df2['year'] = pd.DatetimeIndex(df2['date']).year
+
+df1 = df1[df1['ForwardPeRatio'] < 100]
+symbols = (df1['symbol'].unique())
+#[0] = crlbf
+#[1] = curlf
+#[2] = gtbif
+#[3] = tcnnf
+ 
+x = df1.loc[df1['symbol'] == symbols[0]]
+x1 = df1.loc[df1['symbol'] == symbols[1]] 
+x2 = df1.loc[df1['symbol'] == symbols[2]] 
+x3 = df1.loc[df1['symbol'] == symbols[3]] 
+x4 = df.loc[df['symbol'] == symbols[0]]
+x5 = df.loc[df['symbol'] == symbols[1]]
+x6 = df.loc[df['symbol'] == symbols[2]]
+x7 = df.loc[df['symbol'] == symbols[3]]
+x8 = df2.loc[df2['symbol']== symbols[0]]
+x9 = df2.loc[df2['symbol']== symbols[1]]
+x10 = df2.loc[df2['symbol']== symbols[2]]
+x11 = df2.loc[df2['symbol']== symbols[3]]
+x12 = df.loc[df['symbol'] == symbols[0]]
+x13 = df.loc[df['symbol'] == symbols[1]]
+x14 = df.loc[df['symbol'] == symbols[2]]
+x15 = df.loc[df['symbol'] == symbols[3]]
+yticks1 = [50,40,30,20,10,5]
+
+ 
+fig, ax1 = plt.subplots(figsize=(15,10))
+ax2 = ax1.twinx()
+ax1.plot(x8['date'],x8['close'],label=symbols[0],color='g', linestyle='-')
+ax1.plot(x9['date'],x9['close'],label= symbols[1],color='b', linestyle='--')
+ax1.plot(x10['date'],x10['close'],label= symbols[2],color='r',linestyle='-.')
+ax1.plot(x11['date'],x11['close'],label= symbols[3],color='k',linestyle=':')
+ax2.scatter(x['asOfDate'],x['PbRatio'], label=symbols[0],color='g')
+ax2.scatter(x1['asOfDate'],x1['PbRatio'], label=symbols[1],color='b')
+ax2.scatter(x2['asOfDate'],x2['PbRatio'], label=symbols[2],color='r')
+ax2.scatter(x3['asOfDate'],x3['PbRatio'], label=symbols[3],color='k')
+ax2.set_yticks([10,5,4,3,2,1])
+ax2.set_ylabel('PbRatio')
+ax1.set_yticks(yticks1)
+ax2.set_xticks(ax2.get_xticks()[::50])
+ax1.set_ylabel('Close')
+ax1.legend()
+plt.title('MSOLeaders')
+ 
+ 
+fig, ax1 = plt.subplots(figsize=(15,10))
+ax2 = ax1.twinx()
+ax1.plot(x8['date'],x8['close'],label=symbols[0],color='g', linestyle='-')
+ax1.plot(x9['date'],x9['close'],label= symbols[1],color='b', linestyle='--')
+ax1.plot(x10['date'],x10['close'],label=symbols[2],color='r',linestyle='-.')
+ax1.plot(x11['date'],x11['close'],label=symbols[3],color='k',linestyle=':')
+ax2.scatter(x['asOfDate'],x['PsRatio'], label=symbols[0],color='g')
+ax2.scatter(x1['asOfDate'],x1['PsRatio'], label=symbols[1],color='b')
+ax2.scatter(x2['asOfDate'],x2['PsRatio'], label=symbols[2],color='r')
+ax2.scatter(x3['asOfDate'],x3['PsRatio'], label=symbols[3],color='k')
+ax2.set_ylabel('PsRatio')
+ax1.set_yticks(yticks1)
+ax2.set_yticks([10,5,4,3,2,1])
+ax2.set_xticks(ax2.get_xticks()[::50])
+ax1.set_ylabel('Close')
+ax1.legend()
+plt.title('MSOLeaders')
+ 
+ 
+fig, ax1 = plt.subplots(figsize=(15,10))
+ax2 = ax1.twinx()
+ax1.plot(x8['date'],x8['close'],label=symbols[0],color='g', linestyle='-')
+ax1.plot(x9['date'],x9['close'],label= symbols[1],color='b', linestyle='--')
+ax1.plot(x10['date'],x10['close'],label=symbols[2],color='r',linestyle='-.')
+ax1.plot(x11['date'],x11['close'],label=symbols[3],color='k',linestyle=':')
+ax2.scatter(x['asOfDate'],x['ForwardPeRatio'], label=symbols[0],color='g')
+ax2.scatter(x1['asOfDate'],x1['ForwardPeRatio'], label= symbols[1],color='b')
+ax2.scatter(x2['asOfDate'],x2['ForwardPeRatio'], label=symbols[2],color='r')
+ax2.scatter(x3['asOfDate'],x3['ForwardPeRatio'], label=symbols[3],color='k')
+ax2.set_ylabel('ForwardPeRatio')
+ax1.set_yticks(yticks1)
+ax2.set_yticks([40,30,20,10,5])
+ax2.set_xticks(ax2.get_xticks()[::50])
+ax1.set_ylabel('Close')
+ax1.legend()
+plt.title('MSOLeaders')
+plt.show()
+
+
+
+
+
