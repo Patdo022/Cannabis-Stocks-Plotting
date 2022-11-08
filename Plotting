@@ -30,10 +30,6 @@ x8 = df2.loc[df2['symbol']== symbols[0]]
 x9 = df2.loc[df2['symbol']== symbols[1]]
 x10 = df2.loc[df2['symbol']== symbols[2]]
 x11 = df2.loc[df2['symbol']== symbols[3]]
-x12 = df.loc[df['symbol'] == symbols[0]]
-x13 = df.loc[df['symbol'] == symbols[1]]
-x14 = df.loc[df['symbol'] == symbols[2]]
-x15 = df.loc[df['symbol'] == symbols[3]]
 yticks1 = [50,40,30,20,10,5]
 
  
